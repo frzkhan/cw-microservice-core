@@ -1,0 +1,33 @@
+const path = require('path')
+const basepath = path.join(__dirname)
+
+const fs = require('fs')
+const pack = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), { encoding: 'utf-8' }))
+const version = pack.version || '0.0.0'
+
+module.exports = {
+  service: 'cw-micro-service',
+  fastify: { active: false, port: 3010, prefix: '/api/example', size: 1048576, auth: true, secret: 'cw-micro-service',  allowCORs : false },
+  rabbitmq: { active: false, server: 'localhost:15672', user: 'dev', password: 'dev123' },
+  redis: { active: false, server: 'localhost', port: '16379' },
+  swagger: { active: false, exposeRoute: true },
+  elasticSearch: { active: false, server: 'localhost:9200', timeout: 0, version: '7.6' },
+  logger: { level: 'info' },
+  basepath,
+  version,
+  mongodb: {
+    active: false,
+    server: 'localhost',
+    port: '',
+    user: '',
+    password: '',
+    debug: false,
+    databases: [
+      {
+        name: 'user',
+        db: 'user',
+        options: { auto_reconnect: true }
+      }
+    ]
+  }
+}

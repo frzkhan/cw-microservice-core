@@ -1,0 +1,17 @@
+module.exports = {
+  service : "cw-micro-service",
+  fastify: { active : true, port: 0, auth: true, secret: 'cw-micro-service',  allowCORs : false },
+  redis: { active : true },
+  elasticSearch : { active: true, timeout:0, version: '7.6'},
+  mongodb: {
+    active: true,
+    debug: false,
+    databases: [
+      {
+        name: 'user',
+        db: 'user',
+        options: { auto_reconnect: true }
+      }
+    ]
+  }
+}
